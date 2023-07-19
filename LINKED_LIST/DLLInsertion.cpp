@@ -46,8 +46,16 @@ int getLength(Node *&head)
     return len;
 }
 
-void InsertHead(Node *&head, int data)
+void InsertHead(Node *&head, Node *&tail, int data)
 {
+    if (head == NULL)
+    {
+        Node *temp = new Node(data);
+        head = temp;
+        tail = temp;
+
+        return;
+    }
 
     Node *temp = new Node(data);
 
@@ -56,8 +64,17 @@ void InsertHead(Node *&head, int data)
     head = temp;
 }
 
-void InsertTail(Node *&tail, int data)
+void InsertTail(Node *&tail, Node *&head, int data)
 {
+    if (head == NULL)
+    {
+        Node *temp = new Node(data);
+        head = temp;
+        tail = temp;
+
+        return;
+    }
+
     Node *temp = new Node(data);
     tail->next = temp;
     temp->prev = tail;
@@ -67,9 +84,18 @@ void InsertTail(Node *&tail, int data)
 void InsertPosition(Node *&head, Node *&tail, int position, int data)
 {
 
+    if (head == NULL)
+    {
+        Node *temp = new Node(data);
+        head = temp;
+        tail = temp;
+
+        return;
+    }
+
     if (position == 1)
     {
-        InsertHead(head, data);
+        InsertHead(head, tail, data);
         return;
     }
 
@@ -84,7 +110,9 @@ void InsertPosition(Node *&head, Node *&tail, int position, int data)
 
     if (temp->next == NULL)
     {
-        InsertTail(tail, data);
+        InsertTail(tail, head, data);
+
+        return;
     }
 
     Node *nodeToInsert = new Node(data);
@@ -98,19 +126,28 @@ void InsertPosition(Node *&head, Node *&tail, int position, int data)
 int main()
 {
 
-    Node *node1 = new Node(10);
-    Node *head = node1;
-    Node *tail = node1;
+    Node *head = NULL;
+    Node *tail = NULL;
 
+    InsertHead(head, tail, 11);
     printDLL(head);
 
-    InsertHead(head, 11);
+    InsertHead(head, tail, 13);
     printDLL(head);
 
-    InsertTail(tail, 12);
+    InsertHead(head, tail, 8);
     printDLL(head);
 
-    InsertPosition(head, tail, 2, 13);
+    InsertTail(tail, head, 25);
+    printDLL(head);
+
+    InsertPosition(head, tail, 2, 100);
+    printDLL(head);
+
+    InsertPosition(head, tail, 1, 101);
+    printDLL(head);
+
+    InsertPosition(head, tail, 7, 102);
     printDLL(head);
 
     return 0;
