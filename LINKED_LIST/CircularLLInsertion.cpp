@@ -75,5 +75,11 @@ int main()
     InsertPosition(tail, 5, 3);
     printCLL(tail);
 
+    InsertPosition(tail, 3, 4);
+    printCLL(tail);
+
+    InsertPosition(tail, 4, 5);
+    printCLL(tail);
+
     return 0;
 }
