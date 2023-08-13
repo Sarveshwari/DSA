@@ -184,6 +184,27 @@ Node* floydDetectLoop(Node* head)
     return 0;
 }
 
+Node* getStartingNode(Node* head) {
+
+    if(head == NULL) 
+        return NULL;
+
+    Node* intersection = floydDetectLoop(head);
+    
+    if(intersection == NULL)
+        return NULL;
+    
+    Node* slow = head;
+
+    while(slow != intersection) {
+        slow = slow -> next;
+        intersection = intersection -> next;
+    }  
+
+    return slow;
+
+}
+
 int main()
 {
     Node *tail = NULL;
