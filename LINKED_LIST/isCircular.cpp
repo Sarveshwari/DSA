@@ -129,6 +129,61 @@ bool isCircular(Node* head)
     return false;
 }
 
+bool detectLoop(Node* head)
+{
+    if(head==NULL)
+    {
+        return false;
+    }
+
+    map<Node*,bool> visited;
+
+    Node* temp=head;
+
+    while(temp!=NULL)
+    {
+        if(visited[temp]==true)
+        {
+            return true;
+        }
+
+        visited[temp]=true;
+        temp=temp->next;
+    }
+
+    return false;
+    
+
+}
+
+Node* floydDetectLoop(Node* head)
+{
+    if(head==NULL)
+    {
+        return 0;
+    }
+
+    Node* slow=head;
+    Node* fast=head;
+
+    while(slow!=NULL)
+    {
+        fast=fast->next;
+        if(fast->next==NULL){
+            return 0;
+        }
+        slow=slow->next;
+
+        if(slow==fast)
+        {
+            return slow;
+        }
+
+    }
+
+    return 0;
+}
+
 int main()
 {
     Node *tail = NULL;
